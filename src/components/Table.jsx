@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PlanetContext from '../context/PlanetContext';
 
 function Table() {
   const header = ['Name',
@@ -15,23 +16,37 @@ function Table() {
     'Edited',
     'Url',
   ];
+  const {
+    search,
+    setSearch,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    number,
+    setNumber,
+    handleFilters,
+    data,
+  } = useContext(PlanetContext);
   return (
-
     <div>
       <form>
         <input
           type="text"
           data-testid="name-filter"
-          onChange
-          value=""
-          placeholder
+          onChange={ (e) => {
+            setSearch(e.target.value);
+            handleFilters(e);
+          } }
+          value={ search }
+          placeholder="Faça uma busca"
           name="name-filter"
         />
 
         <select
           data-testid="column-filter"
-          onChange
-          value
+          onChange={ (e) => setColumn(e.target.value) }
+          value={ column }
         >
           <option value="population">population</option>
           <option value="orbital_period">orbital_period</option>
@@ -40,7 +55,11 @@ function Table() {
           <option value="surface_water">surface_water</option>
         </select>
 
-        <select data-testid="comparison-filter" onChange value>
+        <select
+          data-testid="comparison-filter"
+          onChange={ (e) => setComparison(e.target.value) }
+          value={ comparison }
+        >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>
           <option value="igual a">igual a</option>
@@ -49,14 +68,15 @@ function Table() {
         <input
           type="number"
           data-testid="value-filter"
-          onChange
-          value
+          onChange={ (e) => setNumber(e.target.value) }
+          value={ number }
         />
 
         <button
           type="button"
           data-testid="button-filter"
-          onClick
+          onClick={ (e) => handleFilters(e) }
+          name="button-filter"
         >
           Filtrar
         </button>
@@ -70,7 +90,27 @@ function Table() {
             ))}
           </tr>
         </thead>
-        <tbody />
+        <tbody>
+          {
+            data.map((planet, index) => (
+              <tr key={ index }>
+                <td>{planet.name}</td>
+                <td>{planet.rotation_period}</td>
+                <td>{planet.orbital_period}</td>
+                <td>{planet.diameter}</td>
+                <td>{planet.climate}</td>
+                <td>{planet.gravity}</td>
+                <td>{planet.terrain}</td>
+                <td>{planet.surface_water}</td>
+                <td>{planet.films[0]}</td>
+                <td>{planet.population}</td>
+                <td>{planet.created}</td>
+                <td>{planet.edited}</td>
+                <td>{planet.url}</td>
+              </tr>
+            ))
+          }
+        </tbody>
       </table>
     </div>
   );
