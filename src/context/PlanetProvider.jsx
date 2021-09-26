@@ -21,7 +21,7 @@ function PlanetProvider({ children }) {
 
   function handleFilters({ target: { name, value } }) {
     if (name === 'name-filter') {
-      // console.log(data);
+      console.log(value);
     }
     if (name === 'button-filter') {
       // console.log(value);
