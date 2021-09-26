@@ -48,7 +48,7 @@ function Table() {
           onChange={ (e) => setColumn(e.target.value) }
           value={ column }
         >
-          <option value="population">population</option>
+          <option name="population" value="population">population</option>
           <option value="orbital_period">orbital_period</option>
           <option value="diameter">diameter</option>
           <option value="rotation_period">rotation_period</option>
@@ -60,9 +60,9 @@ function Table() {
           onChange={ (e) => setComparison(e.target.value) }
           value={ comparison }
         >
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
+          <option name="maior_que" value="maior que">maior que</option>
+          <option name="menor_que" value="menor que">menor que</option>
+          <option name="igual_a" value="igual a">igual a</option>
         </select>
 
         <input

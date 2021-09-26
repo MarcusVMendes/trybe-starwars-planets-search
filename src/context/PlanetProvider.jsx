@@ -25,9 +25,7 @@ function PlanetProvider({ children }) {
     if (name === 'name-filter') {
       setFilteredData(data.filter((planet) => planet.name.includes(value)));
     }
-    if (name === 'button-filter') {
-      // console.log(value);
-    }
+    // if (name === 'button-filter')
   }
 
   return (
