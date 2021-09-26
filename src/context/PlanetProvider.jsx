@@ -25,7 +25,21 @@ function PlanetProvider({ children }) {
     if (name === 'name-filter') {
       setFilteredData(data.filter((planet) => planet.name.includes(value)));
     }
-    // if (name === 'button-filter')
+    if (name === 'button-filter') {
+      switch (comparison) {
+      case 'maior que':
+        return setFilteredData(data.filter((planet) => Number(planet[column]) > number));
+
+      case 'menor que':
+        return setFilteredData(data.filter((planet) => Number(planet[column]) < number));
+
+      case 'igual a':
+        return setFilteredData(data.filter((planet) => Number(planet[column]) === number));
+
+      default:
+        return setFilteredData(data);
+      }
+    }
   }
 
   return (
