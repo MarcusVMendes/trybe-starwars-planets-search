@@ -28,13 +28,16 @@ function PlanetProvider({ children }) {
     if (name === 'button-filter') {
       switch (comparison) {
       case 'maior que':
-        return setFilteredData(data.filter((planet) => Number(planet[column]) > number));
+        return setFilteredData(data
+          .filter((planet) => Number(planet[column]) > Number(number)));
 
       case 'menor que':
-        return setFilteredData(data.filter((planet) => Number(planet[column]) < number));
+        return setFilteredData(data
+          .filter((planet) => Number(planet[column]) < Number(number)));
 
       case 'igual a':
-        return setFilteredData(data.filter((planet) => Number(planet[column]) === number));
+        return setFilteredData(data
+          .filter((planet) => Number(planet[column]) === Number(number)));
 
       default:
         return setFilteredData(data);
@@ -70,3 +73,8 @@ PlanetProvider.propTypes = {
 };
 
 export default PlanetProvider;
+
+/*
+Créditos ao Nikolai pela sugestão do switch case dinamico. Eu estava usando object literals, entretanto
+o arquivo ficou muito grande e o lint estava reclamando.
+*/
