@@ -26,7 +26,7 @@ function Table() {
     number,
     setNumber,
     handleFilters,
-    data,
+    filteredData,
   } = useContext(PlanetContext);
   return (
     <div>
@@ -92,7 +92,7 @@ function Table() {
         </thead>
         <tbody>
           {
-            data.map((planet, index) => (
+            filteredData.map((planet, index) => (
               <tr key={ index }>
                 <td>{planet.name}</td>
                 <td>{planet.rotation_period}</td>

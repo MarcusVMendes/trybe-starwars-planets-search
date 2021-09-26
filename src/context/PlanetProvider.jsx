@@ -8,6 +8,7 @@ function PlanetProvider({ children }) {
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [number, setNumber] = useState(0);
+  const [filteredData, setFilteredData] = useState([]);
   useEffect(() => {
     async function requestApi() {
       const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
@@ -15,13 +16,14 @@ function PlanetProvider({ children }) {
       results.forEach((result) => delete result.residents);
 
       setData(results);
+      setFilteredData(results);
     }
     requestApi();
   }, []);
 
   function handleFilters({ target: { name, value } }) {
     if (name === 'name-filter') {
-      console.log(value);
+      setFilteredData(data.filter((planet) => planet.name.includes(value)));
     }
     if (name === 'button-filter') {
       // console.log(value);
@@ -42,6 +44,7 @@ function PlanetProvider({ children }) {
           setNumber,
           handleFilters,
           data,
+          filteredData,
         } }
       >
         { children }
