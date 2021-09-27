@@ -5,14 +5,14 @@ import PlanetContext from './PlanetContext';
 function PlanetProvider({ children }) {
   const [planetsState, planetSetState] = useState();
   const [numericFilterIsActive, setNumericFilterIsActive] = useState(false);
-
+  const [usedOption, setUsedOption] = useState('');
   useEffect(() => {
     async function requestApi() {
       const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
       const { results } = await fetch(url).then((response) => response.json());
       results.forEach((planet) => delete planet.residents);
+
       planetSetState(results);
-      console.log(results);
     }
     requestApi();
   }, []);
@@ -49,6 +49,8 @@ function PlanetProvider({ children }) {
     setFilterByNumericValues,
     numericFilterIsActive,
     setNumericFilterIsActive,
+    usedOption,
+    setUsedOption,
   };
 
   return (
@@ -65,3 +67,8 @@ PlanetProvider.propTypes = {
 };
 
 export default PlanetProvider;
+
+/*
+Estrutura do Provider sugerida pelo NIkolai para lidar com filtros,
+uma vez que a lógica que eu estava usando não estava passando no requisito 4.
+*/

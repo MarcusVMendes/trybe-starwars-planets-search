@@ -87,6 +87,8 @@ function Table() {
                 </tr>
               ))
             : filteredPlanetsByNumericValue
+              .filter((planet) => (
+                planet.name.toLowerCase()).includes(name.toLowerCase()))
               .map((planet) => (
                 <tr key={ planet.diameter }>
                   <td>{planet.name}</td>

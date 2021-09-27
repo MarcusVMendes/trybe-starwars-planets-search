@@ -6,17 +6,50 @@ function Select() {
     filterByNumericValues,
     setFilterByNumericValues,
     setNumericFilterIsActive,
+    usedOption,
+    setUsedOption,
   } = useContext(PlanetContext);
 
+  const comparisonValues = [
+    <>
+      <option value="maior que">maior que</option>
+      <option value="menor que">menor que</option>
+      <option value="igual a">igual a</option>
+    </>,
+  ];
+
   const { filterByNumericValues: { column, comparison, value } } = filterByNumericValues;
+
+  function removeOptions() {
+    const options = [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ];
+    return options.map((option) => {
+      if (usedOption !== option) {
+        return (
+          <option
+            key={ option }
+            value={ option }
+          >
+            { option }
+          </option>
+        );
+      }
+      return null;
+    });
+  }
 
   function handleCLick() {
     setFilterByNumericValues({
       filterByNumericValues: {
         ...filterByNumericValues.filterByNumericValues,
-      },
-    });
+      } });
     setNumericFilterIsActive(true);
+    setUsedOption(column);
   }
 
   return (
@@ -32,11 +65,7 @@ function Select() {
             } }) }
           value={ column }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          { removeOptions() }
         </select>
 
         <select
@@ -51,6 +80,7 @@ function Select() {
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>
           <option value="igual a">igual a</option>
+          { comparisonValues }
         </select>
 
         <input
@@ -78,3 +108,8 @@ function Select() {
 }
 
 export default Select;
+
+/*
+Estrutura dinamica da option sugerida no grupo de whatsapp da turma bem como
+pelo Nikolai que me ajudou a compreender a estrutura esperada pelo projeto.
+*/
