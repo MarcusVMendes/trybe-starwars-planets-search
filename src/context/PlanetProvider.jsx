@@ -16,8 +16,19 @@ function PlanetProvider({ children }) {
     requestApi();
   }, []);
 
+  const filtersRecipe = {
+    filters: {
+      filterByName: {
+        name: '',
+      },
+    },
+  };
+
+  const [filter, setFilter] = useState(filtersRecipe);
   const context = {
     data: planetsState,
+    filter,
+    setFilter,
   };
 
   return (
