@@ -4,6 +4,7 @@ import PlanetContext from './PlanetContext';
 
 function PlanetProvider({ children }) {
   const [planetsState, planetSetState] = useState();
+  const [numericFilterIsActive, setNumericFilterIsActive] = useState(false);
 
   useEffect(() => {
     async function requestApi() {
@@ -16,7 +17,16 @@ function PlanetProvider({ children }) {
     requestApi();
   }, []);
 
-  const filtersRecipe = {
+  const filterByNumericValuesRecipe = {
+    filterByNumericValues:
+    {
+      column: 'population',
+      comparison: 'maior que',
+      value: 0,
+    },
+  };
+
+  const filtersByNameRecipe = {
     filters: {
       filterByName: {
         name: '',
@@ -24,11 +34,21 @@ function PlanetProvider({ children }) {
     },
   };
 
-  const [filter, setFilter] = useState(filtersRecipe);
+  const [filter, setFilter] = useState(filtersByNameRecipe);
+
+  const [
+    filterByNumericValues,
+    setFilterByNumericValues,
+  ] = useState(filterByNumericValuesRecipe);
+
   const context = {
     data: planetsState,
     filter,
     setFilter,
+    filterByNumericValues,
+    setFilterByNumericValues,
+    numericFilterIsActive,
+    setNumericFilterIsActive,
   };
 
   return (
